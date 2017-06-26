@@ -1,4 +1,6 @@
-$.get('https://yelp-camp-ankurgupta67.c9users.io:8080/todos', function(todos) {
+//var dom = specify domain and port for server;
+
+$.get(dom + '/todos', function(todos) {
     todos.forEach(function(todo) {
         $('#todo-list').append(
             `
@@ -30,7 +32,7 @@ $.get('https://yelp-camp-ankurgupta67.c9users.io:8080/todos', function(todos) {
 $('#new-todo-form').submit(function(e) {
     e.preventDefault();
     var todoItem = $(this).serialize();
-    $.post('https://yelp-camp-ankurgupta67.c9users.io:8080/todos', todoItem, function(data) {
+    $.post(dom + '/todos', todoItem, function(data) {
         if (!data.error) {
             $('#todo-list').append(
                 `
@@ -75,7 +77,7 @@ $("#todo-list").on('click', '.edit-button', function() {
 $("#todo-list").on('submit', '.edit-item-form', function(e) {
     e.preventDefault();
     var todoItem = $(this).serialize();
-    var actionUrl = "https://yelp-camp-ankurgupta67.c9users.io:8080" + $(this).attr('action');
+    var actionUrl = dom + $(this).attr('action');
     var $originalItem = $(this).parent('.list-group-item');
     $.ajax({
         url: actionUrl,
@@ -114,7 +116,7 @@ $("#todo-list").on('submit', '.delete-item-form', function(e) {
     e.preventDefault();
     var confirmResponse = confirm("Are you sure?");
     if (confirmResponse) {
-        var actionUrl = "https://yelp-camp-ankurgupta67.c9users.io:8080" + $(this).attr('action');
+        var actionUrl = dom + $(this).attr('action');
         var $itemToDelete = $(this).closest('.list-group-item');
         $.ajax({
             url: actionUrl,
@@ -131,7 +133,7 @@ $("#todo-list").on('submit', '.delete-item-form', function(e) {
 
 $('#search').on('input', function(e) {
     e.preventDefault();
-    $.get(`https://yelp-camp-ankurgupta67.c9users.io:8080/todos?keyword=${e.target.value}`, function(data) {
+    $.get(dom + `/todos?keyword=${e.target.value}`, function(data) {
         $('#todo-list').html('');
         data.forEach(function(todo) {
             $('#todo-list').append(

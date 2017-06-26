@@ -10,8 +10,10 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(expressSanitizer());
 
+
 app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "https://yelp-camp-ankurgupta67.c9users.io:8081");
+    //var dom = specify domain and port for client;
+    res.header("Access-Control-Allow-Origin", dom);
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
     next();
